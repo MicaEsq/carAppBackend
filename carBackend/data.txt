@@ -1,0 +1,760 @@
+Brands----------------------------------------------------------------------------------------
+
+from car_backend.models import Brand
+
+brands = [
+    'Abarth', 'Acura', 'Alfa Romeo', 'Aston Martin', 'Audi', 'Bentley', 'BMW', 'Buick',
+    'Cadillac', 'Chevrolet', 'Chrysler', 'Citroen', 'Dacia', 'Dodge', 'Ferrari', 'Fiat',
+    'Ford', 'GMC', 'Honda', 'Hummer', 'Hyundai', 'Infiniti', 'Isuzu', 'Jaguar', 'Jeep',
+    'Kia', 'Lamborghini', 'Lancia', 'Land Rover', 'Lexus', 'Lincoln', 'Lotus', 'Maserati',
+    'Mazda', 'McLaren', 'Mercedes-Benz', 'Mercury', 'Mini', 'Mitsubishi', 'Nissan', 'Opel',
+    'Peugeot', 'Pontiac', 'Porsche', 'Ram', 'Renault', 'Rolls-Royce', 'Saab', 'Saturn',
+    'Scion', 'Seat', 'Skoda', 'Smart', 'SsangYong', 'Subaru', 'Suzuki', 'Tesla', 'Toyota',
+    'Volkswagen', 'Volvo', 'Wiesmann'
+]
+
+for brand_name in brands:
+    Brand.objects.create(name=brand_name)
+
+Brand.objects.all()
+
+Models----------------------------------------------------------------------------------------
+
+import psycopg2
+
+# Establish a connection to your PostgreSQL database
+conn = psycopg2.connect(
+    host="localhost",
+    database="car_db_2",
+    user="admindb",
+    password="03r9fz20w3!"
+)
+
+# Create a cursor object to interact with the database
+cursor = conn.cursor()
+
+# SQL code to insert data
+sql_code = """
+    INSERT INTO models (name, brand_id)
+VALUES
+  -- Abarth
+  ('500', (SELECT id FROM brands WHERE name = 'Abarth')),
+  ('124 Spider', (SELECT id FROM brands WHERE name = 'Abarth')),
+
+  -- Acura
+  ('ILX', (SELECT id FROM brands WHERE name = 'Acura')),
+  ('MDX', (SELECT id FROM brands WHERE name = 'Acura')),
+  ('NSX', (SELECT id FROM brands WHERE name = 'Acura')),
+  ('RDX', (SELECT id FROM brands WHERE name = 'Acura')),
+  ('RLX', (SELECT id FROM brands WHERE name = 'Acura')),
+  ('TLX', (SELECT id FROM brands WHERE name = 'Acura')),
+
+  -- Alfa Romeo
+  ('Giulia', (SELECT id FROM brands WHERE name = 'Alfa Romeo')),
+  ('Stelvio', (SELECT id FROM brands WHERE name = 'Alfa Romeo')),
+  ('4C', (SELECT id FROM brands WHERE name = 'Alfa Romeo')),
+
+  -- Aston Martin
+  ('DB11', (SELECT id FROM brands WHERE name = 'Aston Martin')),
+  ('Vantage', (SELECT id FROM brands WHERE name = 'Aston Martin')),
+  ('DBS Superleggera', (SELECT id FROM brands WHERE name = 'Aston Martin')),
+  ('Rapide', (SELECT id FROM brands WHERE name = 'Aston Martin')),
+  ('Valhalla', (SELECT id FROM brands WHERE name = 'Aston Martin')),
+  ('Valkyrie', (SELECT id FROM brands WHERE name = 'Aston Martin')),
+  ('DBX', (SELECT id FROM brands WHERE name = 'Aston Martin')),
+
+  -- Audi
+  ('A3', (SELECT id FROM brands WHERE name = 'Audi')),
+  ('A4', (SELECT id FROM brands WHERE name = 'Audi')),
+  ('A5', (SELECT id FROM brands WHERE name = 'Audi')),
+  ('A6', (SELECT id FROM brands WHERE name = 'Audi')),
+  ('A7', (SELECT id FROM brands WHERE name = 'Audi')),
+  ('A8', (SELECT id FROM brands WHERE name = 'Audi')),
+  ('Q3', (SELECT id FROM brands WHERE name = 'Audi')),
+  ('Q5', (SELECT id FROM brands WHERE name = 'Audi')),
+  ('Q7', (SELECT id FROM brands WHERE name = 'Audi')),
+  ('Q8', (SELECT id FROM brands WHERE name = 'Audi')),
+
+  -- Bentley
+  ('Continental GT', (SELECT id FROM brands WHERE name = 'Bentley')),
+  ('Flying Spur', (SELECT id FROM brands WHERE name = 'Bentley')),
+  ('Bentayga', (SELECT id FROM brands WHERE name = 'Bentley')),
+
+  -- BMW
+  ('3 Series', (SELECT id FROM brands WHERE name = 'BMW')),
+  ('5 Series', (SELECT id FROM brands WHERE name = 'BMW')),
+  ('7 Series', (SELECT id FROM brands WHERE name = 'BMW')),
+  ('X1', (SELECT id FROM brands WHERE name = 'BMW')),
+  ('X3', (SELECT id FROM brands WHERE name = 'BMW')),
+  ('X5', (SELECT id FROM brands WHERE name = 'BMW')),
+  ('M3', (SELECT id FROM brands WHERE name = 'BMW')),
+  ('M5', (SELECT id FROM brands WHERE name = 'BMW')),
+  ('i3', (SELECT id FROM brands WHERE name = 'BMW')),
+  ('i8', (SELECT id FROM brands WHERE name = 'BMW')),
+
+  -- Buick
+  ('Encore', (SELECT id FROM brands WHERE name = 'Buick')),
+  ('Envision', (SELECT id FROM brands WHERE name = 'Buick')),
+  ('Enclave', (SELECT id FROM brands WHERE name = 'Buick')),
+  ('Regal', (SELECT id FROM brands WHERE name = 'Buick')),
+  ('LaCrosse', (SELECT id FROM brands WHERE name = 'Buick')),
+  ('Cascada', (SELECT id FROM brands WHERE name = 'Buick')),
+
+  -- Cadillac
+  ('XT4', (SELECT id FROM brands WHERE name = 'Cadillac')),
+  ('XT5', (SELECT id FROM brands WHERE name = 'Cadillac')),
+  ('XT6', (SELECT id FROM brands WHERE name = 'Cadillac')),
+  ('Escalade', (SELECT id FROM brands WHERE name = 'Cadillac')),
+  ('CT4', (SELECT id FROM brands WHERE name = 'Cadillac')),
+  ('CT5', (SELECT id FROM brands WHERE name = 'Cadillac')),
+  ('CT6', (SELECT id FROM brands WHERE name = 'Cadillac')),
+
+  -- Chevrolet
+  ('Cruze', (SELECT id FROM brands WHERE name = 'Chevrolet')),
+  ('Malibu', (SELECT id FROM brands WHERE name = 'Chevrolet')),
+  ('Impala', (SELECT id FROM brands WHERE name = 'Chevrolet')),
+  ('Camaro', (SELECT id FROM brands WHERE name = 'Chevrolet')),
+  ('Corvette', (SELECT id FROM brands WHERE name = 'Chevrolet')),
+  ('Equinox', (SELECT id FROM brands WHERE name = 'Chevrolet')),
+  ('Traverse', (SELECT id FROM brands WHERE name = 'Chevrolet')),
+  ('Tahoe', (SELECT id FROM brands WHERE name = 'Chevrolet')),
+  ('Suburban', (SELECT id FROM brands WHERE name = 'Chevrolet')),
+  ('Silverado', (SELECT id FROM brands WHERE name = 'Chevrolet')),
+
+  -- Chrysler
+  ('300', (SELECT id FROM brands WHERE name = 'Chrysler')),
+  ('Pacifica', (SELECT id FROM brands WHERE name = 'Chrysler')),
+  ('Voyager', (SELECT id FROM brands WHERE name = 'Chrysler')),
+  ('PT Cruiser', (SELECT id FROM brands WHERE name = 'Chrysler')),
+  ('Aspen', (SELECT id FROM brands WHERE name = 'Chrysler')),
+
+  -- Citroen
+  ('C3', (SELECT id FROM brands WHERE name = 'Citroen')),
+  ('C4', (SELECT id FROM brands WHERE name = 'Citroen')),
+  ('C5', (SELECT id FROM brands WHERE name = 'Citroen')),
+  ('Berlingo', (SELECT id FROM brands WHERE name = 'Citroen')),
+  ('Jumpy', (SELECT id FROM brands WHERE name = 'Citroen')),
+  ('Spacetourer', (SELECT id FROM brands WHERE name = 'Citroen')),
+
+  -- Dacia
+  ('Sandero', (SELECT id FROM brands WHERE name = 'Dacia')),
+  ('Logan', (SELECT id FROM brands WHERE name = 'Dacia')),
+  ('Duster', (SELECT id FROM brands WHERE name = 'Dacia')),
+  ('Lodgy', (SELECT id FROM brands WHERE name = 'Dacia')),
+  ('Dokker', (SELECT id FROM brands WHERE name = 'Dacia')),
+
+  -- Dodge
+  ('Charger', (SELECT id FROM brands WHERE name = 'Dodge')),
+  ('Challenger', (SELECT id FROM brands WHERE name = 'Dodge')),
+  ('Durango', (SELECT id FROM brands WHERE name = 'Dodge')),
+  ('Journey', (SELECT id FROM brands WHERE name = 'Dodge')),
+  ('Grand Caravan', (SELECT id FROM brands WHERE name = 'Dodge')),
+  ('Viper', (SELECT id FROM brands WHERE name = 'Dodge')),
+  ('Ram', (SELECT id FROM brands WHERE name = 'Dodge')),
+
+  -- Ferrari
+  ('458 Italia', (SELECT id FROM brands WHERE name = 'Ferrari')),
+  ('488 GTB', (SELECT id FROM brands WHERE name = 'Ferrari')),
+  ('812 Superfast', (SELECT id FROM brands WHERE name = 'Ferrari')),
+  ('F8 Tributo', (SELECT id FROM brands WHERE name = 'Ferrari')),
+  ('Portofino', (SELECT id FROM brands WHERE name = 'Ferrari')),
+  ('SF90 Stradale', (SELECT id FROM brands WHERE name = 'Ferrari')),
+  ('GTC4Lusso', (SELECT id FROM brands WHERE name = 'Ferrari')),
+  ('LaFerrari', (SELECT id FROM brands WHERE name = 'Ferrari')),
+  ('Enzo', (SELECT id FROM brands WHERE name = 'Ferrari')),
+  ('Testarossa', (SELECT id FROM brands WHERE name = 'Ferrari')),
+
+  -- Fiat
+  ('500', (SELECT id FROM brands WHERE name = 'Fiat')),
+  ('Panda', (SELECT id FROM brands WHERE name = 'Fiat')),
+  ('Tipo', (SELECT id FROM brands WHERE name = 'Fiat')),
+  ('Doblo', (SELECT id FROM brands WHERE name = 'Fiat')),
+  ('500X', (SELECT id FROM brands WHERE name = 'Fiat')),
+  ('500L', (SELECT id FROM brands WHERE name = 'Fiat')),
+
+  -- Ford
+  ('Mustang', (SELECT id FROM brands WHERE name = 'Ford')),
+  ('Focus', (SELECT id FROM brands WHERE name = 'Ford')),
+  ('Fusion', (SELECT id FROM brands WHERE name = 'Ford')),
+  ('Escape', (SELECT id FROM brands WHERE name = 'Ford')),
+  ('Explorer', (SELECT id FROM brands WHERE name = 'Ford')),
+  ('Expedition', (SELECT id FROM brands WHERE name = 'Ford')),
+  ('Ranger', (SELECT id FROM brands WHERE name = 'Ford')),
+  ('F-150', (SELECT id FROM brands WHERE name = 'Ford')),
+  ('Edge', (SELECT id FROM brands WHERE name = 'Ford')),
+  ('EcoSport', (SELECT id FROM brands WHERE name = 'Ford')),
+
+  -- GMC
+  ('Sierra', (SELECT id FROM brands WHERE name = 'GMC')),
+  ('Canyon', (SELECT id FROM brands WHERE name = 'GMC')),
+  ('Acadia', (SELECT id FROM brands WHERE name = 'GMC')),
+  ('Terrain', (SELECT id FROM brands WHERE name = 'GMC')),
+  ('Yukon', (SELECT id FROM brands WHERE name = 'GMC')),
+  ('Savana', (SELECT id FROM brands WHERE name = 'GMC')),
+
+  -- Honda
+  ('Civic', (SELECT id FROM brands WHERE name = 'Honda')),
+  ('Accord', (SELECT id FROM brands WHERE name = 'Honda')),
+  ('CR-V', (SELECT id FROM brands WHERE name = 'Honda')),
+  ('Pilot', (SELECT id FROM brands WHERE name = 'Honda')),
+  ('Odyssey', (SELECT id FROM brands WHERE name = 'Honda')),
+  ('Ridgeline', (SELECT id FROM brands WHERE name = 'Honda')),
+  ('Fit', (SELECT id FROM brands WHERE name = 'Honda')),
+  ('HR-V', (SELECT id FROM brands WHERE name = 'Honda')),
+  ('Passport', (SELECT id FROM brands WHERE name = 'Honda')),
+  ('Insight', (SELECT id FROM brands WHERE name = 'Honda')),
+
+  -- Hyundai
+  ('Elantra', (SELECT id FROM brands WHERE name = 'Hyundai')),
+  ('Sonata', (SELECT id FROM brands WHERE name = 'Hyundai')),
+  ('Accent', (SELECT id FROM brands WHERE name = 'Hyundai')),
+  ('Tucson', (SELECT id FROM brands WHERE name = 'Hyundai')),
+  ('Santa Fe', (SELECT id FROM brands WHERE name = 'Hyundai')),
+  ('Kona', (SELECT id FROM brands WHERE name = 'Hyundai')),
+  ('Venue', (SELECT id FROM brands WHERE name = 'Hyundai')),
+  ('Palisade', (SELECT id FROM brands WHERE name = 'Hyundai')),
+  ('Genesis', (SELECT id FROM brands WHERE name = 'Hyundai')),
+  ('Veloster', (SELECT id FROM brands WHERE name = 'Hyundai')),
+
+  -- Infiniti
+  ('Q50', (SELECT id FROM brands WHERE name = 'Infiniti')),
+  ('Q60', (SELECT id FROM brands WHERE name = 'Infiniti')),
+  ('QX50', (SELECT id FROM brands WHERE name = 'Infiniti')),
+  ('QX60', (SELECT id FROM brands WHERE name = 'Infiniti')),
+  ('QX80', (SELECT id FROM brands WHERE name = 'Infiniti')),
+  ('Q70', (SELECT id FROM brands WHERE name = 'Infiniti')),
+  ('QX30', (SELECT id FROM brands WHERE name = 'Infiniti')),
+  ('QX70', (SELECT id FROM brands WHERE name = 'Infiniti')),
+  ('QX45', (SELECT id FROM brands WHERE name = 'Infiniti')),
+  ('QX55', (SELECT id FROM brands WHERE name = 'Infiniti')),
+
+  -- Isuzu
+  ('D-Max', (SELECT id FROM brands WHERE name = 'Isuzu')),
+  ('MU-X', (SELECT id FROM brands WHERE name = 'Isuzu')),
+  ('Trooper', (SELECT id FROM brands WHERE name = 'Isuzu')),
+  ('Rodeo', (SELECT id FROM brands WHERE name = 'Isuzu')),
+  ('Amigo', (SELECT id FROM brands WHERE name = 'Isuzu')),
+  ('Ascender', (SELECT id FROM brands WHERE name = 'Isuzu')),
+
+  -- Jaguar
+  ('F-Type', (SELECT id FROM brands WHERE name = 'Jaguar')),
+  ('XE', (SELECT id FROM brands WHERE name = 'Jaguar')),
+  ('XF', (SELECT id FROM brands WHERE name = 'Jaguar')),
+  ('XJ', (SELECT id FROM brands WHERE name = 'Jaguar')),
+  ('F-Pace', (SELECT id FROM brands WHERE name = 'Jaguar')),
+  ('E-Pace', (SELECT id FROM brands WHERE name = 'Jaguar')),
+  ('I-Pace', (SELECT id FROM brands WHERE name = 'Jaguar')),
+  ('XK', (SELECT id FROM brands WHERE name = 'Jaguar')),
+  ('XKR', (SELECT id FROM brands WHERE name = 'Jaguar')),
+  ('XKR-S', (SELECT id FROM brands WHERE name = 'Jaguar')),
+
+  -- Jeep
+  ('Wrangler', (SELECT id FROM brands WHERE name = 'Jeep')),
+  ('Cherokee', (SELECT id FROM brands WHERE name = 'Jeep')),
+  ('Grand Cherokee', (SELECT id FROM brands WHERE name = 'Jeep')),
+  ('Renegade', (SELECT id FROM brands WHERE name = 'Jeep')),
+  ('Compass', (SELECT id FROM brands WHERE name = 'Jeep')),
+  ('Gladiator', (SELECT id FROM brands WHERE name = 'Jeep')),
+  ('Commander', (SELECT id FROM brands WHERE name = 'Jeep')),
+  ('Liberty', (SELECT id FROM brands WHERE name = 'Jeep')),
+  ('Patriot', (SELECT id FROM brands WHERE name = 'Jeep')),
+  ('Wagoneer', (SELECT id FROM brands WHERE name = 'Jeep')),
+
+  -- Kia
+  ('Forte', (SELECT id FROM brands WHERE name = 'Kia')),
+  ('Optima', (SELECT id FROM brands WHERE name = 'Kia')),
+  ('Soul', (SELECT id FROM brands WHERE name = 'Kia')),
+  ('Sportage', (SELECT id FROM brands WHERE name = 'Kia')),
+  ('Sorento', (SELECT id FROM brands WHERE name = 'Kia')),
+  ('Telluride', (SELECT id FROM brands WHERE name = 'Kia')),
+  ('Cadenza', (SELECT id FROM brands WHERE name = 'Kia')),
+  ('Stinger', (SELECT id FROM brands WHERE name = 'Kia')),
+  ('Rio', (SELECT id FROM brands WHERE name = 'Kia')),
+  ('Niro', (SELECT id FROM brands WHERE name = 'Kia')),
+
+  -- Lamborghini
+  ('Aventador', (SELECT id FROM brands WHERE name = 'Lamborghini')),
+  ('Huracan', (SELECT id FROM brands WHERE name = 'Lamborghini')),
+  ('Urus', (SELECT id FROM brands WHERE name = 'Lamborghini')),
+  ('Gallardo', (SELECT id FROM brands WHERE name = 'Lamborghini')),
+  ('Murcielago', (SELECT id FROM brands WHERE name = 'Lamborghini')),
+  ('Diablo', (SELECT id FROM brands WHERE name = 'Lamborghini')),
+  ('Countach', (SELECT id FROM brands WHERE name = 'Lamborghini')),
+  ('Veneno', (SELECT id FROM brands WHERE name = 'Lamborghini')),
+  ('Reventon', (SELECT id FROM brands WHERE name = 'Lamborghini')),
+  ('Centenario', (SELECT id FROM brands WHERE name = 'Lamborghini')),
+
+  -- Land Rover
+  ('Range Rover', (SELECT id FROM brands WHERE name = 'Land Rover')),
+  ('Range Rover Sport', (SELECT id FROM brands WHERE name = 'Land Rover')),
+  ('Range Rover Velar', (SELECT id FROM brands WHERE name = 'Land Rover')),
+  ('Range Rover Evoque', (SELECT id FROM brands WHERE name = 'Land Rover')),
+  ('Discovery', (SELECT id FROM brands WHERE name = 'Land Rover')),
+  ('Discovery Sport', (SELECT id FROM brands WHERE name = 'Land Rover')),
+  ('Defender', (SELECT id FROM brands WHERE name = 'Land Rover')),
+  ('Freelander', (SELECT id FROM brands WHERE name = 'Land Rover')),
+  ('LR2', (SELECT id FROM brands WHERE name = 'Land Rover')),
+  ('LR3', (SELECT id FROM brands WHERE name = 'Land Rover')),
+
+  -- Lexus
+  ('IS', (SELECT id FROM brands WHERE name = 'Lexus')),
+  ('ES', (SELECT id FROM brands WHERE name = 'Lexus')),
+  ('GS', (SELECT id FROM brands WHERE name = 'Lexus')),
+  ('LS', (SELECT id FROM brands WHERE name = 'Lexus')),
+  ('NX', (SELECT id FROM brands WHERE name = 'Lexus')),
+  ('RX', (SELECT id FROM brands WHERE name = 'Lexus')),
+  ('UX', (SELECT id FROM brands WHERE name = 'Lexus')),
+  ('LC', (SELECT id FROM brands WHERE name = 'Lexus')),
+  ('RC', (SELECT id FROM brands WHERE name = 'Lexus')),
+  ('LFA', (SELECT id FROM brands WHERE name = 'Lexus')),
+
+  -- Lincoln
+  ('MKZ', (SELECT id FROM brands WHERE name = 'Lincoln')),
+  ('Continental', (SELECT id FROM brands WHERE name = 'Lincoln')),
+  ('MKC', (SELECT id FROM brands WHERE name = 'Lincoln')),
+  ('Nautilus', (SELECT id FROM brands WHERE name = 'Lincoln')),
+  ('Aviator', (SELECT id FROM brands WHERE name = 'Lincoln')),
+  ('Navigator', (SELECT id FROM brands WHERE name = 'Lincoln')),
+  ('MKS', (SELECT id FROM brands WHERE name = 'Lincoln')),
+  ('MKT', (SELECT id FROM brands WHERE name = 'Lincoln')),
+  ('Blackwood', (SELECT id FROM brands WHERE name = 'Lincoln')),
+  ('Zephyr', (SELECT id FROM brands WHERE name = 'Lincoln')),
+
+  -- Maserati
+  ('Ghibli', (SELECT id FROM brands WHERE name = 'Maserati')),
+  ('Quattroporte', (SELECT id FROM brands WHERE name = 'Maserati')),
+  ('Levante', (SELECT id FROM brands WHERE name = 'Maserati')),
+  ('GranTurismo', (SELECT id FROM brands WHERE name = 'Maserati')),
+  ('GranCabrio', (SELECT id FROM brands WHERE name = 'Maserati')),
+  ('Spyder', (SELECT id FROM brands WHERE name = 'Maserati')),
+  ('Coupe', (SELECT id FROM brands WHERE name = 'Maserati')),
+  ('Karif', (SELECT id FROM brands WHERE name = 'Maserati')),
+  ('Biturbo', (SELECT id FROM brands WHERE name = 'Maserati')),
+  ('Mistral', (SELECT id FROM brands WHERE name = 'Maserati')),
+
+  -- Mazda
+  ('Mazda3', (SELECT id FROM brands WHERE name = 'Mazda')),
+  ('Mazda6', (SELECT id FROM brands WHERE name = 'Mazda')),
+  ('MX-5', (SELECT id FROM brands WHERE name = 'Mazda')),
+  ('CX-3', (SELECT id FROM brands WHERE name = 'Mazda')),
+  ('CX-5', (SELECT id FROM brands WHERE name = 'Mazda')),
+  ('CX-9', (SELECT id FROM brands WHERE name = 'Mazda')),
+  ('MX-30', (SELECT id FROM brands WHERE name = 'Mazda')),
+  ('RX-8', (SELECT id FROM brands WHERE name = 'Mazda')),
+  ('RX-7', (SELECT id FROM brands WHERE name = 'Mazda')),
+  ('626', (SELECT id FROM brands WHERE name = 'Mazda')),
+
+  -- McLaren
+  ('570S', (SELECT id FROM brands WHERE name = 'McLaren')),
+  ('720S', (SELECT id FROM brands WHERE name = 'McLaren')),
+  ('P1', (SELECT id FROM brands WHERE name = 'McLaren')),
+  ('675LT', (SELECT id FROM brands WHERE name = 'McLaren')),
+  ('GT', (SELECT id FROM brands WHERE name = 'McLaren')),
+  ('600LT', (SELECT id FROM brands WHERE name = 'McLaren')),
+  ('650S', (SELECT id FROM brands WHERE name = 'McLaren')),
+  ('MP4-12C', (SELECT id FROM brands WHERE name = 'McLaren')),
+  ('540C', (SELECT id FROM brands WHERE name = 'McLaren')),
+  ('570GT', (SELECT id FROM brands WHERE name = 'McLaren')),
+
+  -- Mercedes-Benz
+  ('C-Class', (SELECT id FROM brands WHERE name = 'Mercedes-Benz')),
+  ('E-Class', (SELECT id FROM brands WHERE name = 'Mercedes-Benz')),
+  ('S-Class', (SELECT id FROM brands WHERE name = 'Mercedes-Benz')),
+  ('A-Class', (SELECT id FROM brands WHERE name = 'Mercedes-Benz')),
+  ('B-Class', (SELECT id FROM brands WHERE name = 'Mercedes-Benz')),
+  ('G-Class', (SELECT id FROM brands WHERE name = 'Mercedes-Benz')),
+  ('GLA-Class', (SELECT id FROM brands WHERE name = 'Mercedes-Benz')),
+  ('GLC-Class', (SELECT id FROM brands WHERE name = 'Mercedes-Benz')),
+  ('GLE-Class', (SELECT id FROM brands WHERE name = 'Mercedes-Benz')),
+  ('GLS-Class', (SELECT id FROM brands WHERE name = 'Mercedes-Benz')),
+
+  -- Mitsubishi
+  ('Lancer', (SELECT id FROM brands WHERE name = 'Mitsubishi')),
+  ('Outlander', (SELECT id FROM brands WHERE name = 'Mitsubishi')),
+  ('Pajero', (SELECT id FROM brands WHERE name = 'Mitsubishi')),
+  ('Eclipse', (SELECT id FROM brands WHERE name = 'Mitsubishi')),
+  ('Mirage', (SELECT id FROM brands WHERE name = 'Mitsubishi')),
+  ('ASX', (SELECT id FROM brands WHERE name = 'Mitsubishi')),
+  ('Galant', (SELECT id FROM brands WHERE name = 'Mitsubishi')),
+  ('3000GT', (SELECT id FROM brands WHERE name = 'Mitsubishi')),
+  ('Montero', (SELECT id FROM brands WHERE name = 'Mitsubishi')),
+  ('RVR', (SELECT id FROM brands WHERE name = 'Mitsubishi')),
+
+  -- Nissan
+  ('Altima', (SELECT id FROM brands WHERE name = 'Nissan')),
+  ('Maxima', (SELECT id FROM brands WHERE name = 'Nissan')),
+  ('Sentra', (SELECT id FROM brands WHERE name = 'Nissan')),
+  ('Versa', (SELECT id FROM brands WHERE name = 'Nissan')),
+  ('370Z', (SELECT id FROM brands WHERE name = 'Nissan')),
+  ('GT-R', (SELECT id FROM brands WHERE name = 'Nissan')),
+  ('Rogue', (SELECT id FROM brands WHERE name = 'Nissan')),
+  ('Murano', (SELECT id FROM brands WHERE name = 'Nissan')),
+  ('Pathfinder', (SELECT id FROM brands WHERE name = 'Nissan')),
+  ('Armada', (SELECT id FROM brands WHERE name = 'Nissan')),
+
+  -- Porsche
+  ('911', (SELECT id FROM brands WHERE name = 'Porsche')),
+  ('Cayman', (SELECT id FROM brands WHERE name = 'Porsche')),
+  ('Panamera', (SELECT id FROM brands WHERE name = 'Porsche')),
+  ('Macan', (SELECT id FROM brands WHERE name = 'Porsche')),
+  ('Cayenne', (SELECT id FROM brands WHERE name = 'Porsche')),
+  ('Boxster', (SELECT id FROM brands WHERE name = 'Porsche')),
+  ('918 Spyder', (SELECT id FROM brands WHERE name = 'Porsche')),
+  ('Carrera GT', (SELECT id FROM brands WHERE name = 'Porsche')),
+  ('718', (SELECT id FROM brands WHERE name = 'Porsche')),
+  ('Taycan', (SELECT id FROM brands WHERE name = 'Porsche')),
+
+  -- Rolls-Royce
+  ('Phantom', (SELECT id FROM brands WHERE name = 'Rolls-Royce')),
+  ('Ghost', (SELECT id FROM brands WHERE name = 'Rolls-Royce')),
+  ('Wraith', (SELECT id FROM brands WHERE name = 'Rolls-Royce')),
+  ('Dawn', (SELECT id FROM brands WHERE name = 'Rolls-Royce')),
+  ('Cullinan', (SELECT id FROM brands WHERE name = 'Rolls-Royce')),
+  ('Silver Shadow', (SELECT id FROM brands WHERE name = 'Rolls-Royce')),
+  ('Silver Spirit', (SELECT id FROM brands WHERE name = 'Rolls-Royce')),
+  ('Silver Seraph', (SELECT id FROM brands WHERE name = 'Rolls-Royce')),
+  ('Corniche', (SELECT id FROM brands WHERE name = 'Rolls-Royce')),
+  ('Camargue', (SELECT id FROM brands WHERE name = 'Rolls-Royce')),
+
+  -- Subaru
+  ('Impreza', (SELECT id FROM brands WHERE name = 'Subaru')),
+  ('Legacy', (SELECT id FROM brands WHERE name = 'Subaru')),
+  ('Forester', (SELECT id FROM brands WHERE name = 'Subaru')),
+  ('Outback', (SELECT id FROM brands WHERE name = 'Subaru')),
+  ('Crosstrek', (SELECT id FROM brands WHERE name = 'Subaru')),
+  ('WRX', (SELECT id FROM brands WHERE name = 'Subaru')),
+  ('BRZ', (SELECT id FROM brands WHERE name = 'Subaru')),
+  ('Ascent', (SELECT id FROM brands WHERE name = 'Subaru')),
+  ('Baja', (SELECT id FROM brands WHERE name = 'Subaru')),
+  ('XV', (SELECT id FROM brands WHERE name = 'Subaru')),
+
+  -- Tesla
+  ('Model 3', (SELECT id FROM brands WHERE name = 'Tesla')),
+  ('Model S', (SELECT id FROM brands WHERE name = 'Tesla')),
+  ('Model X', (SELECT id FROM brands WHERE name = 'Tesla')),
+  ('Model Y', (SELECT id FROM brands WHERE name = 'Tesla')),
+  ('Roadster', (SELECT id FROM brands WHERE name = 'Tesla')),
+  ('Cybertruck', (SELECT id FROM brands WHERE name = 'Tesla')),
+  ('Semi', (SELECT id FROM brands WHERE name = 'Tesla')),
+  ('Powerwall', (SELECT id FROM brands WHERE name = 'Tesla')),
+  ('Powerpack', (SELECT id FROM brands WHERE name = 'Tesla')),
+  ('Solar Roof', (SELECT id FROM brands WHERE name = 'Tesla')),
+
+  -- Toyota
+  ('Corolla', (SELECT id FROM brands WHERE name = 'Toyota')),
+  ('Camry', (SELECT id FROM brands WHERE name = 'Toyota')),
+  ('Prius', (SELECT id FROM brands WHERE name = 'Toyota')),
+  ('Yaris', (SELECT id FROM brands WHERE name = 'Toyota')),
+  ('Rav4', (SELECT id FROM brands WHERE name = 'Toyota')),
+  ('Highlander', (SELECT id FROM brands WHERE name = 'Toyota')),
+  ('Tacoma', (SELECT id FROM brands WHERE name = 'Toyota')),
+  ('Tundra', (SELECT id FROM brands WHERE name = 'Toyota')),
+  ('4Runner', (SELECT id FROM brands WHERE name = 'Toyota')),
+  ('Land Cruiser', (SELECT id FROM brands WHERE name = 'Toyota')),
+
+  -- Volkswagen
+  ('Golf', (SELECT id FROM brands WHERE name = 'Volkswagen')),
+  ('Jetta', (SELECT id FROM brands WHERE name = 'Volkswagen')),
+  ('Passat', (SELECT id FROM brands WHERE name = 'Volkswagen')),
+  ('Arteon', (SELECT id FROM brands WHERE name = 'Volkswagen')),
+  ('Tiguan', (SELECT id FROM brands WHERE name = 'Volkswagen')),
+  ('Atlas', (SELECT id FROM brands WHERE name = 'Volkswagen')),
+  ('Beetle', (SELECT id FROM brands WHERE name = 'Volkswagen')),
+  ('Touareg', (SELECT id FROM brands WHERE name = 'Volkswagen')),
+  ('ID.4', (SELECT id FROM brands WHERE name = 'Volkswagen')),
+  ('CC', (SELECT id FROM brands WHERE name = 'Volkswagen')),
+
+  -- Volvo
+  ('S60', (SELECT id FROM brands WHERE name = 'Volvo')),
+  ('S90', (SELECT id FROM brands WHERE name = 'Volvo')),
+  ('XC40', (SELECT id FROM brands WHERE name = 'Volvo')),
+  ('XC60', (SELECT id FROM brands WHERE name = 'Volvo')),
+  ('XC70', (SELECT id FROM brands WHERE name = 'Volvo')),
+  ('XC90', (SELECT id FROM brands WHERE name = 'Volvo')),
+  ('V60', (SELECT id FROM brands WHERE name = 'Volvo')),
+  ('V90', (SELECT id FROM brands WHERE name = 'Volvo')),
+  ('C30', (SELECT id FROM brands WHERE name = 'Volvo')),
+  ('C70', (SELECT id FROM brands WHERE name = 'Volvo'));
+"""
+
+# Execute the SQL code
+cursor.execute(sql_code)
+
+# Commit the changes to the database
+conn.commit()
+
+# Close the cursor and the connection
+cursor.close()
+conn.close()
+
+
+States ----------------------------------------------------------------------------------------
+
+from car_backend.models import State
+
+states = [
+    'Alabama',    'Alaska',    'Arizona',    'Arkansas',    'California',    'Colorado',
+    'Connecticut',    'Delaware',    'Florida',    'Georgia',    'Hawaii',    'Idaho',
+    'Illinois',    'Indiana',    'Iowa',    'Kansas',    'Kentucky',    'Louisiana',
+    'Maine',    'Maryland',    'Massachusetts',    'Michigan',    'Minnesota',    'Mississippi',
+    'Missouri',    'Montana',    'Nebraska',    'Nevada',    'New Hampshire',    'New Jersey',
+    'New Mexico',    'New York',    'North Carolina',    'North Dakota',    'Ohio',    'Oklahoma',
+    'Oregon',    'Pennsylvania',    'Rhode Island',    'South Carolina',    'South Dakota',
+    'Tennessee',    'Texas',    'Utah',    'Vermont',    'Virginia',    'Washington',    'West Virginia',
+    'Wisconsin',    'Wyoming'
+]
+
+
+for state_name in states:
+    State.objects.create(name=state_name)
+
+State.objects.all()
+
+Cities ----------------------------------------------------------------------------------------
+
+import psycopg2
+
+# Establish a connection to your PostgreSQL database
+conn = psycopg2.connect(
+    host="localhost",
+    database="car_db_2",
+    user="admindb",
+    password="03r9fz20w3!"
+)
+
+# Create a cursor object to interact with the database
+cursor = conn.cursor()
+
+# SQL code to insert data
+sql_code = """
+INSERT INTO cities (state_id, name)
+VALUES
+  -- Alabama
+  ((SELECT id FROM states WHERE name = 'Alabama'), 'Birmingham'),
+  ((SELECT id FROM states WHERE name = 'Alabama'), 'Montgomery'),
+  ((SELECT id FROM states WHERE name = 'Alabama'), 'Mobile'),
+  -- Alaska
+  ((SELECT id FROM states WHERE name = 'Alaska'), 'Anchorage'),
+  ((SELECT id FROM states WHERE name = 'Alaska'), 'Fairbanks'),
+  ((SELECT id FROM states WHERE name = 'Alaska'), 'Juneau'),
+  -- Arizona
+  ((SELECT id FROM states WHERE name = 'Arizona'), 'Phoenix'),
+  ((SELECT id FROM states WHERE name = 'Arizona'), 'Tucson'),
+  ((SELECT id FROM states WHERE name = 'Arizona'), 'Mesa'),
+  -- Arkansas
+  ((SELECT id FROM states WHERE name = 'Arkansas'), 'Little Rock'),
+  ((SELECT id FROM states WHERE name = 'Arkansas'), 'Fort Smith'),
+  ((SELECT id FROM states WHERE name = 'Arkansas'), 'Fayetteville'),
+  -- California
+  ((SELECT id FROM states WHERE name = 'California'), 'Los Angeles'),
+  ((SELECT id FROM states WHERE name = 'California'), 'San Francisco'),
+  ((SELECT id FROM states WHERE name = 'California'), 'San Diego'),
+  -- Colorado
+  ((SELECT id FROM states WHERE name = 'Colorado'), 'Denver'),
+  ((SELECT id FROM states WHERE name = 'Colorado'), 'Colorado Springs'),
+  ((SELECT id FROM states WHERE name = 'Colorado'), 'Aurora'),
+  -- Connecticut
+  ((SELECT id FROM states WHERE name = 'Connecticut'), 'Bridgeport'),
+  ((SELECT id FROM states WHERE name = 'Connecticut'), 'New Haven'),
+  ((SELECT id FROM states WHERE name = 'Connecticut'), 'Hartford'),
+  -- Delaware
+  ((SELECT id FROM states WHERE name = 'Delaware'), 'Wilmington'),
+  ((SELECT id FROM states WHERE name = 'Delaware'), 'Dover'),
+  ((SELECT id FROM states WHERE name = 'Delaware'), 'Newark'),
+  -- Florida
+  ((SELECT id FROM states WHERE name = 'Florida'), 'Miami'),
+  ((SELECT id FROM states WHERE name = 'Florida'), 'Orlando'),
+  ((SELECT id FROM states WHERE name = 'Florida'), 'Tampa'),
+  -- Georgia
+  ((SELECT id FROM states WHERE name = 'Georgia'), 'Atlanta'),
+  ((SELECT id FROM states WHERE name = 'Georgia'), 'Savannah'),
+  ((SELECT id FROM states WHERE name = 'Georgia'), 'Augusta'),
+  -- Hawaii
+  ((SELECT id FROM states WHERE name = 'Hawaii'), 'Honolulu'),
+  ((SELECT id FROM states WHERE name = 'Hawaii'), 'Hilo'),
+  ((SELECT id FROM states WHERE name = 'Hawaii'), 'Kailua'),
+  -- Idaho
+  ((SELECT id FROM states WHERE name = 'Idaho'), 'Boise'),
+  ((SELECT id FROM states WHERE name = 'Idaho'), 'Meridian'),
+  ((SELECT id FROM states WHERE name = 'Idaho'), 'Nampa'),
+  -- Illinois
+  ((SELECT id FROM states WHERE name = 'Illinois'), 'Chicago'),
+  ((SELECT id FROM states WHERE name = 'Illinois'), 'Springfield'),
+  ((SELECT id FROM states WHERE name = 'Illinois'), 'Rockford'),
+  -- Indiana
+  ((SELECT id FROM states WHERE name = 'Indiana'), 'Indianapolis'),
+  ((SELECT id FROM states WHERE name = 'Indiana'), 'Fort Wayne'),
+  ((SELECT id FROM states WHERE name = 'Indiana'), 'Evansville'),
+  -- Iowa
+  ((SELECT id FROM states WHERE name = 'Iowa'), 'Des Moines'),
+  ((SELECT id FROM states WHERE name = 'Iowa'), 'Cedar Rapids'),
+  ((SELECT id FROM states WHERE name = 'Iowa'), 'Davenport'),
+  -- Kansas
+  ((SELECT id FROM states WHERE name = 'Kansas'), 'Wichita'),
+  ((SELECT id FROM states WHERE name = 'Kansas'), 'Overland Park'),
+  ((SELECT id FROM states WHERE name = 'Kansas'), 'Kansas City'),
+  -- Kentucky
+  ((SELECT id FROM states WHERE name = 'Kentucky'), 'Louisville'),
+  ((SELECT id FROM states WHERE name = 'Kentucky'), 'Lexington'),
+  ((SELECT id FROM states WHERE name = 'Kentucky'), 'Bowling Green'),
+  -- Louisiana
+  ((SELECT id FROM states WHERE name = 'Louisiana'), 'New Orleans'),
+  ((SELECT id FROM states WHERE name = 'Louisiana'), 'Baton Rouge'),
+  ((SELECT id FROM states WHERE name = 'Louisiana'), 'Shreveport'),
+  -- Maine
+  ((SELECT id FROM states WHERE name = 'Maine'), 'Portland'),
+  ((SELECT id FROM states WHERE name = 'Maine'), 'Lewiston'),
+  ((SELECT id FROM states WHERE name = 'Maine'), 'Bangor'),
+  -- Maryland
+  ((SELECT id FROM states WHERE name = 'Maryland'), 'Baltimore'),
+  ((SELECT id FROM states WHERE name = 'Maryland'), 'Annapolis'),
+  ((SELECT id FROM states WHERE name = 'Maryland'), 'Frederick'),
+  -- Massachusetts
+  ((SELECT id FROM states WHERE name = 'Massachusetts'), 'Boston'),
+  ((SELECT id FROM states WHERE name = 'Massachusetts'), 'Worcester'),
+  ((SELECT id FROM states WHERE name = 'Massachusetts'), 'Springfield'),
+  -- Michigan
+  ((SELECT id FROM states WHERE name = 'Michigan'), 'Detroit'),
+  ((SELECT id FROM states WHERE name = 'Michigan'), 'Grand Rapids'),
+  ((SELECT id FROM states WHERE name = 'Michigan'), 'Lansing'),
+  -- Minnesota
+  ((SELECT id FROM states WHERE name = 'Minnesota'), 'Minneapolis'),
+  ((SELECT id FROM states WHERE name = 'Minnesota'), 'St. Paul'),
+  ((SELECT id FROM states WHERE name = 'Minnesota'), 'Rochester'),
+  -- Mississippi
+  ((SELECT id FROM states WHERE name = 'Mississippi'), 'Jackson'),
+  ((SELECT id FROM states WHERE name = 'Mississippi'), 'Gulfport'),
+  ((SELECT id FROM states WHERE name = 'Mississippi'), 'Hattiesburg'),
+  -- Missouri
+  ((SELECT id FROM states WHERE name = 'Missouri'), 'Kansas City'),
+  ((SELECT id FROM states WHERE name = 'Missouri'), 'St. Louis'),
+  ((SELECT id FROM states WHERE name = 'Missouri'), 'Springfield'),
+  -- Montana
+  ((SELECT id FROM states WHERE name = 'Montana'), 'Billings'),
+  ((SELECT id FROM states WHERE name = 'Montana'), 'Missoula'),
+  ((SELECT id FROM states WHERE name = 'Montana'), 'Great Falls'),
+  -- Nebraska
+  ((SELECT id FROM states WHERE name = 'Nebraska'), 'Omaha'),
+  ((SELECT id FROM states WHERE name = 'Nebraska'), 'Lincoln'),
+  ((SELECT id FROM states WHERE name = 'Nebraska'), 'Bellevue'),
+  -- Nevada
+  ((SELECT id FROM states WHERE name = 'Nevada'), 'Las Vegas'),
+  ((SELECT id FROM states WHERE name = 'Nevada'), 'Reno'),
+  ((SELECT id FROM states WHERE name = 'Nevada'), 'Henderson'),
+  -- New Hampshire
+  ((SELECT id FROM states WHERE name = 'New Hampshire'), 'Manchester'),
+  ((SELECT id FROM states WHERE name = 'New Hampshire'), 'Nashua'),
+  ((SELECT id FROM states WHERE name = 'New Hampshire'), 'Concord'),
+  -- New Jersey
+  ((SELECT id FROM states WHERE name = 'New Jersey'), 'Newark'),
+  ((SELECT id FROM states WHERE name = 'New Jersey'), 'Jersey City'),
+  ((SELECT id FROM states WHERE name = 'New Jersey'), 'Paterson'),
+  -- New Mexico
+  ((SELECT id FROM states WHERE name = 'New Mexico'), 'Albuquerque'),
+  ((SELECT id FROM states WHERE name = 'New Mexico'), 'Las Cruces'),
+  ((SELECT id FROM states WHERE name = 'New Mexico'), 'Santa Fe'),
+  -- New York
+  ((SELECT id FROM states WHERE name = 'New York'), 'New York City'),
+  ((SELECT id FROM states WHERE name = 'New York'), 'Buffalo'),
+  ((SELECT id FROM states WHERE name = 'New York'), 'Rochester'),
+  -- North Carolina
+  ((SELECT id FROM states WHERE name = 'North Carolina'), 'Charlotte'),
+  ((SELECT id FROM states WHERE name = 'North Carolina'), 'Raleigh'),
+  ((SELECT id FROM states WHERE name = 'North Carolina'), 'Greensboro'),
+  -- North Dakota
+  ((SELECT id FROM states WHERE name = 'North Dakota'), 'Fargo'),
+  ((SELECT id FROM states WHERE name = 'North Dakota'), 'Bismarck'),
+  ((SELECT id FROM states WHERE name = 'North Dakota'), 'Grand Forks'),
+  -- Ohio
+  ((SELECT id FROM states WHERE name = 'Ohio'), 'Columbus'),
+  ((SELECT id FROM states WHERE name = 'Ohio'), 'Cleveland'),
+  ((SELECT id FROM states WHERE name = 'Ohio'), 'Cincinnati'),
+  -- Oklahoma
+  ((SELECT id FROM states WHERE name = 'Oklahoma'), 'Oklahoma City'),
+  ((SELECT id FROM states WHERE name = 'Oklahoma'), 'Tulsa'),
+  ((SELECT id FROM states WHERE name = 'Oklahoma'), 'Norman'),
+  -- Oregon
+  ((SELECT id FROM states WHERE name = 'Oregon'), 'Portland'),
+  ((SELECT id FROM states WHERE name = 'Oregon'), 'Salem'),
+  ((SELECT id FROM states WHERE name = 'Oregon'), 'Eugene'),
+  -- Pennsylvania
+  ((SELECT id FROM states WHERE name = 'Pennsylvania'), 'Philadelphia'),
+  ((SELECT id FROM states WHERE name = 'Pennsylvania'), 'Pittsburgh'),
+  ((SELECT id FROM states WHERE name = 'Pennsylvania'), 'Allentown'),
+  -- Rhode Island
+  ((SELECT id FROM states WHERE name = 'Rhode Island'), 'Providence'),
+  ((SELECT id FROM states WHERE name = 'Rhode Island'), 'Warwick'),
+  ((SELECT id FROM states WHERE name = 'Rhode Island'), 'Cranston'),
+  -- South Carolina
+  ((SELECT id FROM states WHERE name = 'South Carolina'), 'Columbia'),
+  ((SELECT id FROM states WHERE name = 'South Carolina'), 'Charleston'),
+  ((SELECT id FROM states WHERE name = 'South Carolina'), 'North Charleston'),
+  -- South Dakota
+  ((SELECT id FROM states WHERE name = 'South Dakota'), 'Sioux Falls'),
+  ((SELECT id FROM states WHERE name = 'South Dakota'), 'Rapid City'),
+  ((SELECT id FROM states WHERE name = 'South Dakota'), 'Aberdeen'),
+  -- Tennessee
+  ((SELECT id FROM states WHERE name = 'Tennessee'), 'Nashville'),
+  ((SELECT id FROM states WHERE name = 'Tennessee'), 'Memphis'),
+  ((SELECT id FROM states WHERE name = 'Tennessee'), 'Knoxville'),
+  -- Texas
+  ((SELECT id FROM states WHERE name = 'Texas'), 'Houston'),
+  ((SELECT id FROM states WHERE name = 'Texas'), 'Dallas'),
+  ((SELECT id FROM states WHERE name = 'Texas'), 'Austin'),
+  -- Utah
+  ((SELECT id FROM states WHERE name = 'Utah'), 'Salt Lake City'),
+  ((SELECT id FROM states WHERE name = 'Utah'), 'West Valley City'),
+  ((SELECT id FROM states WHERE name = 'Utah'), 'Provo'),
+  -- Vermont
+  ((SELECT id FROM states WHERE name = 'Vermont'), 'Burlington'),
+  ((SELECT id FROM states WHERE name = 'Vermont'), 'Essex'),
+  ((SELECT id FROM states WHERE name = 'Vermont'), 'South Burlington'),
+  -- Virginia
+  ((SELECT id FROM states WHERE name = 'Virginia'), 'Virginia Beach'),
+  ((SELECT id FROM states WHERE name = 'Virginia'), 'Norfolk'),
+  ((SELECT id FROM states WHERE name = 'Virginia'), 'Richmond'),
+  -- Washington
+  ((SELECT id FROM states WHERE name = 'Washington'), 'Seattle'),
+  ((SELECT id FROM states WHERE name = 'Washington'), 'Spokane'),
+  ((SELECT id FROM states WHERE name = 'Washington'), 'Tacoma'),
+  -- West Virginia
+  ((SELECT id FROM states WHERE name = 'West Virginia'), 'Charleston'),
+  ((SELECT id FROM states WHERE name = 'West Virginia'), 'Huntington'),
+  ((SELECT id FROM states WHERE name = 'West Virginia'), 'Morgantown'),
+  -- Wisconsin
+  ((SELECT id FROM states WHERE name = 'Wisconsin'), 'Milwaukee'),
+  ((SELECT id FROM states WHERE name = 'Wisconsin'), 'Madison'),
+  ((SELECT id FROM states WHERE name = 'Wisconsin'), 'Green Bay'),
+   -- Wyoming  ((SELECT id FROM states WHERE name = 'Wyoming'), 'Cheyenne'),
+  ((SELECT id FROM states WHERE name = 'Wyoming'), 'Casper'),
+  ((SELECT id FROM states WHERE name = 'Wyoming'), 'Laramie');
+"""
+
+# Execute the SQL code
+cursor.execute(sql_code)
+
+# Commit the changes to the database
+conn.commit()
+
+# Close the cursor and the connection
+cursor.close()
+conn.close()
+
+
+Cars ---------------------------------------------------------------------------------------------------
+
+from database:
+
+
+INSERT INTO cars (year,version,transmission,condition,price,mileage,image,promoted,financing,color,fuel,observation,brand_id,city_id,model_id,state_id)
+VALUES
+(2023, 'VS 12.3', 'Automatic', 'Used', 20000, 5000, 'car.jpg', True, False, 'Orange', 'Petrol', 'Beautiful car', 1, 1, 1, 1),
+(2021, 'VS 12.3', 'Manual', 'New', 30000, 100000, 'car.jpg', True, True, 'White', 'Petrol', 'Beautiful car', 1, 1, 1, 1),
+(2021, 'VS 12.3', 'Automatic', 'Used', 20000, 25000, 'car.jpg', False, True, 'Blue', 'Bio-diesel', 'Beautiful car', 1, 1, 1, 1),
+(2021, 'VS 12.3', 'Automatic', 'Used', 9000, 5000, 'car.jpg', True, True, 'Orange', 'Petrol', 'Beautiful car', 1, 1, 1, 1),
+(2020, 'VS 12.3', 'Manual', 'New', 20000, 25000, 'car.jpg', True, False, 'Orange', 'Petrol', 'Beautiful car', 1, 1, 1, 1),
+(2020, 'VS 12.3', 'Automatic', 'Used', 20000, 50000, 'car.jpg', True, True, 'Orange', 'Gas', 'Beautiful car', 1, 1, 1, 1),
+(2020, 'VS 12.3', 'Automatic', 'New', 10000, 5000, 'car.jpg', True, True, 'Orange', 'Petrol', 'Beautiful car', 1, 1, 1, 1),
+(2020, 'VS 12.3', 'Manual', 'Used', 5000, 5000, 'car.jpg', False, True, 'White', 'Petrol', 'Beautiful car', 1, 1, 1, 1),
+(2019, 'VS 12.3', 'Automatic', 'Used', 20000, 100000, 'car.jpg', True, True, 'Orange', 'Gas', 'Beautiful car', 1, 1, 1, 1),
+(2019, 'VS 12.3', 'Manual', 'Used', 10500, 50000, 'car.jpg', True, False, 'Blue', 'Petrol', 'Beautiful car', 1, 1, 1, 1);
