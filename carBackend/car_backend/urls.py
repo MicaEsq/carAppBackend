@@ -16,5 +16,4 @@ urlpatterns = [
     path('city/all/', views.get_cities, name='get_cities'),
     path('city/create/', views.create_city, name='create_city'),
     path('filters/', views.get_filters, name='get_filters'),
-
 ]
