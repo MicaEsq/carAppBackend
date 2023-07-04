@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+:root {
+  --max-width: 1500px;
+  --border-radius: 12px;
+  --font: 'Raleway', sans-serif;
+  --background-color:#FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font);
+}
+
+html,
+body {
+  max-width: var(--max-width);
+  background-color: var(--background-color);
+  margin:auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
