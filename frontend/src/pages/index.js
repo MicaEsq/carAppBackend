@@ -114,19 +114,29 @@ function CarsView() {
         //getFilteredData(data, setDataFiltered, filtersApplied, setTotalItems, setDataPaginated);
         let params = '';
         for(var i=0; i<filtersApplied.length; i++){
-          if(i === filtersApplied.length-1){
+          if(i === filtersApplied.length-1 && filtersApplied[i].label !== 'brands' && filtersApplied[i].label !== 'states' && filtersApplied[i].label !== 'cities' && filtersApplied[i].label !== 'models'){
             params = params + filtersApplied[i].label + '=' + filtersApplied[i].value;
+          }
+          else if(filtersApplied[i].label === 'brands' || filtersApplied[i].label === 'states' || filtersApplied[i].label === 'cities' || filtersApplied[i].label === 'models' ){
+            if(i === filtersApplied.length-1){
+              params = params + filtersApplied[i].label + '=' + filtersApplied[i].idOption;
+            }
+            else{
+              params = params + filtersApplied[i].label + '=' + filtersApplied[i].idOption + '&';
+            }
           }
           else{
             params = params + filtersApplied[i].label + '=' + filtersApplied[i].value + '&';
           }
+
         }
 
         if(params === ''){
           getData('cars/all/')
         }
         else{
-          getData('cars?' + params)
+          console.log(params)
+          getData('cars/all/?' + params)
         }
         
         setModifiedFilter(false);

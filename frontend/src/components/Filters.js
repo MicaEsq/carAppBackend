@@ -17,8 +17,6 @@ export default function Filters({setFiltersApplied, filtersApplied, setModifiedF
       getFilters('models', '');
       getFilters('states', '');
       getFilters('cities', '');
-
-      console.log('entro')
     }
   }, [])
 
@@ -182,10 +180,15 @@ export default function Filters({setFiltersApplied, filtersApplied, setModifiedF
     }
     
     
-    if(options.type === 'states' || options.type === 'cities' || options.type === 'brands' || options.type === 'models' || options.type === 'transmission'){
+    if(options.type === 'states' || options.type === 'cities' || options.type === 'brands' || options.type === 'models'){
       return options.values.map((option, index) => {
-          return <Disclosure.Button key={index} className='text-[#1B2141] pb-4 text-left ml-4' onClick={()=>{addToSet(option.name, options.type, option.id); checkGet(option.id)}}>{option.name}</Disclosure.Button>
+          return <Disclosure.Button key={index} className='text-[#1B2141] pb-4 text-left ml-4' onClick={()=>{addToSet(option.filter_name, options.type, option.filter_id); checkGet(option.filter_id)}}>{option.filter_name}</Disclosure.Button>
       } )
+    }
+    else if(options.type === 'transmission'){
+      return options.values.map((option, index) => {
+        return <Disclosure.Button key={index} className='text-[#1B2141] pb-4 text-left ml-4' onClick={()=>{addToSet(option.name, options.type, option.id); checkGet(option.id)}}>{option.name}</Disclosure.Button>
+    } )
     }
     else if(options.type === 'year' || options.type === 'price' ){
   

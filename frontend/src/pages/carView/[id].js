@@ -200,6 +200,9 @@ function CarView() {
                       </svg>
                       Simulate financing</Link>}
                   </li>
+                  <li className="text-gray-400">
+                    <span className="text-gray-700">Location: {carData.city.name + ', ' + carData.state.name}</span>
+                  </li>
                 </ul>
                 <ul role="list" className="list-disc space-y-2 mt-4 ml-14 text-sm md:text-md">
                   <li className="text-gray-400">

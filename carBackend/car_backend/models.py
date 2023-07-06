@@ -59,6 +59,7 @@ class Car(models.Model):
     financing = models.BooleanField()
     color = models.CharField(max_length=50)
     fuel = models.CharField(max_length=50)
+    capacity = models.IntegerField(null=True)
     observation = models.CharField(max_length=255)
 
     def __str__(self):

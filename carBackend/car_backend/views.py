@@ -1,7 +1,7 @@
 import json
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
-from django.db.models import F
+from django.db.models import F, Q
 from .serializers import CarSerializer
 from .models import State, City, Car, Brand, Model
 
@@ -31,6 +31,7 @@ def create_car(request):
             financing=data['financing'],
             color = data['color'],
             fuel = data['fuel'],
+            capacity = data['capacity'],
             observation = data['observation']
         )
         car.save()
@@ -41,9 +42,53 @@ def create_car(request):
 
 def get_cars(request):
     if request.method == 'GET':
-        cars = Car.objects.all()
-        serializer = CarSerializer(cars, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        filter_values = {
+                'brands': request.GET.get('brands'),
+                'models': request.GET.get('models'),
+                'year': request.GET.get('year'),
+                'states': request.GET.get('states'),
+                'cities': request.GET.get('cities'),
+                'transmission': request.GET.get('transmission'),
+                'price': request.GET.get('price'),
+                'mileage': request.GET.get('mileage')
+        }
+
+        if(any(filter_values.values())):
+
+            filters_query = Q()
+            query = []
+
+            if filter_values['brands']:
+                query.append(Q(brand_id=filter_values['brands']))
+            if filter_values['models']:
+                query.append(Q(model_id=filter_values['models']))
+            if filter_values['year']:
+                query.append(Q(year=filter_values['year']))
+            if filter_values['states']:
+                query.append(Q(state_id=filter_values['states']))
+            if filter_values['cities']:
+                query.append(Q(city_id=filter_values['cities']))
+            if filter_values['transmission']:
+                query.append(Q(transmission=filter_values['transmission']))
+            if filter_values['price']:
+                query.append(Q(price=filter_values['price']))
+            if filter_values['mileage']:
+                query.append(Q(mileage=filter_values['mileage']))
+
+            for i, q in enumerate(query):
+                if i == 0:
+                    filters_query = q
+                else:
+                    filters_query &= q
+
+            cars = Car.objects.filter(filters_query)
+
+            serializer = CarSerializer(cars, many=True)
+            return JsonResponse(serializer.data, safe=False)
+        else:
+            cars = Car.objects.all()
+            serializer = CarSerializer(cars, many=True)
+            return JsonResponse(serializer.data, safe=False)
     else:
         return JsonResponse({'message': 'Invalid request method'})
 
@@ -122,7 +167,6 @@ def get_brands(request):
         return JsonResponse({'message': 'Invalid request method'})
 
 def create_brand(request):
-     
     if request.method == 'POST':
         name = request.POST.get('name')
 
@@ -149,7 +193,6 @@ def get_models(request):
         return JsonResponse({'message': 'Invalid request method'})
 
 def create_model(request):
-     
     if request.method == 'POST':
         name = request.POST.get('name')
         brand = request.POST.get('brand')
@@ -181,7 +224,6 @@ def get_cities(request):
         return JsonResponse({'message': 'Invalid request method'})
 
 def create_city(request):
-     
     if request.method == 'POST':
         name = request.POST.get('name')
         state = request.POST.get('state')
