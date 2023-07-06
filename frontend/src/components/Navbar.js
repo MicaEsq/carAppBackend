@@ -12,7 +12,7 @@ export default function Navbar() {
 
   function handleLogout(){
       
-      let url = 'http://localhost:3001/logout';
+      let url = 'http://localhost:8000/api/logout';
       let method = 'GET';
       let msgError = "Error, logout wasn't possible.";
   
@@ -102,12 +102,12 @@ export default function Navbar() {
                       >
                         Favorites
                       </a>
-                      <a
-                        href={"/logout"}
+                      <p
+                        onClick={handleLogout}
                         className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-indigo-100"
                       >
                         Log out
-                      </a>
+                      </p>
                   </div>
                 </Popover.Panel>
               </Transition>

@@ -18,9 +18,10 @@ const LoginPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     
-    let url = 'http://localhost:3001/login';
+    let url = 'http://localhost:8000/api/login/';
     let method = 'POST';
     let msgError = "Error, the password or username is invalid.";
+    //Never do this in production, this is only for dev
     let data = {username: username, password: password};
 
     var requestOptions = {
@@ -39,17 +40,13 @@ const LoginPage = () => {
         }
     })
     .then(([responseOk, body]) => {
-        
         setUsername('');
         setPassword('');
         router.push('/');
-        //window.location.replace('/');
     })
     .catch((error) => {
         setError(error.message);
     });
-
-    
   };
 
   return (

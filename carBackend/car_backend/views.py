@@ -4,6 +4,9 @@ from django.http import JsonResponse
 from django.db.models import F, Q
 from .serializers import CarSerializer
 from .models import State, City, Car, Brand, Model
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+
 
 
 def create_car(request):
@@ -268,3 +271,40 @@ def get_filters(request):
         return JsonResponse(list(filters), safe=False)
     else:
         return JsonResponse({'message': 'Invalid request method'})
+    
+
+def login_user(request):
+    if request.method == 'POST':
+        username = json.loads(request.body)['username']
+        password = json.loads(request.body)['password']
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return JsonResponse({'session_id': request.session.session_key})
+        else:
+            return JsonResponse({'message': 'Invalid login credentials'}, status=401)
+    else:
+        return JsonResponse({'message': 'Invalid request method'})
+    
+def register(request):
+    if request.method == 'POST':
+        username = json.loads(request.body)['username']
+        password = json.loads(request.body)['password']
+
+        if not username or not password:
+            return JsonResponse({'message': 'Username and password are required'}, status=400)
+
+        if User.objects.filter(username=username).exists():
+            return JsonResponse({'message': 'Username already exists'}, status=401)
+
+        user = User.objects.create_user(username=username, password=password)
+        user.save()
+        return JsonResponse({'message': 'Registration successful'})
+    else:
+        return JsonResponse({'message': 'Invalid request method'})
+    
+def logout_view(request):
+    logout(request)
+    return JsonResponse({'message': 'Logout successful'})
+

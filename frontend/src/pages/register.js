@@ -1,5 +1,6 @@
-import { event } from 'jquery';
 import { useState } from 'react';
+import { useRouter } from 'next/router'
+
 
 function RegisterPage(){
   const [username, setUsername] = useState('');
@@ -7,6 +8,7 @@ function RegisterPage(){
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const router = useRouter();
 
   const handleInputChange = (event) => {
     if(event.target.name === 'username'){
@@ -26,16 +28,16 @@ function RegisterPage(){
   const handleSubmit = (event) => {
     event.preventDefault();
     
-    let url = 'http://localhost:3001/register';
+    let url = 'http://localhost:8000/api/register/';
     let method = 'POST';
     let msgError = "Error, the password or username is invalid.";
-    let data = {username: username, password: password, name:name, email:email};
+    let data = {username: username, password: password};
 
     var requestOptions = {
             method: method,
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(data)
-        };
+    };
     
     
     fetch(url, requestOptions)
@@ -55,7 +57,7 @@ function RegisterPage(){
         setEmail('');
         setPassword('');
 
-        window.location.replace('/login');
+        router.push('/login');
         
     })
     .catch((error) => {
